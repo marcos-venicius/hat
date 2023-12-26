@@ -29,3 +29,18 @@ y_pred = model.predict(X_test)
 # Avaliando o modelo
 accuracy = metrics.accuracy_score(y_test, y_pred)
 print('Acurácia:', accuracy)
+
+class T:
+    def __init__(self):
+        self.a = 1
+
+    def p(self):
+        return self.a * 10
+
+while True:
+    t = T()
+
+    for i in range(len(2)):
+        print(t.p())
+
+    break

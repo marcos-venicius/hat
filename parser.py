@@ -1,7 +1,7 @@
 class Parser:
     def __init__(self, filename):
         self.filename = filename
-        self.keywords = set(['import', 'as', 'from'])
+        self.keywords = set(['import', 'as', 'from', 'class', 'for', 'elif', 'if', 'else', 'def', 'in', 'return', 'not', 'while', 'True', 'False', 'break'])
 
     def load_lines(self):
         with open(self.filename, 'r') as f:
@@ -78,9 +78,12 @@ class Parser:
                     yield (char, 'bracket')
                 token = ''
             elif char == '[' or char == ']':
-                yield (token, 'text')
-                yield (char, 'bracket')
-                token = ''
+                if last_char == "'":
+                    token += char
+                else:
+                    yield (token, 'text')
+                    yield (char, 'bracket')
+                    token = ''
             elif char == ',':
                 if token.isnumeric():
                     yield (token, 'number')

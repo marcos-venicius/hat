@@ -1,6 +1,20 @@
 #!/usr/bin/env python3
 
+import sys
 from parser import Parser
+
+args = sys.argv[1:]
+
+if len(args) != 1:
+    print('[!] Error: invalid number of arguments')
+    print('Usage: ./main.py <python-file>')
+    exit(1)
+
+if not args[0].endswith('.py'):
+    print('[!] Error: invalid arguments')
+    print('Usage: ./main.py <python-file>')
+    print('You should only pass python files')
+    exit(1)
 
 class Colors:
     def __init__(self):
@@ -34,11 +48,9 @@ def read_code(name):
     with open(name, 'r') as f:
         return f.readlines()
 
-p = Parser('code.txt')
+p = Parser(args[0])
 
 colors = Colors()
-
-i = 0
 
 for token in p.parse():
     text = token[0]
